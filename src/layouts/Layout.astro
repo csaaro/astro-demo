@@ -1,22 +1,26 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+const { title } = Astro.props; // Titel dynamisch übergeben
+import "../assets/styles/global.css"
+import "../assets/styles/detail.css"; // Glo
+const isHomePage = Astro.url.pathname === "/"
+---
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><slot name="title" /></title>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="navigation">
+        {!isHomePage && <a href="/" class="nav-link">Hauptseite</a>}
+        <slot name="extra-links"></slot> <!-- Zusätzliche Links -->
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>

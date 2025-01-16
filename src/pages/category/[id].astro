@@ -1,0 +1,24 @@
+---
+// import "../../assets/styles/detail.css"; // Importiere die CSS-Datei
+import Layout from "../../layouts/Layout.astro"; // Korrektes Layout importieren
+import { listItems } from "../../data/products"; // Liste importieren
+// `getStaticPaths()` generiert die verfügbaren Kategorien
+export async function getStaticPaths() {
+  // Extrahiere die Kategorie-IDs aus den Daten
+  const categoryIds = [...new Set(listItems.map((item) => item.categoryId))];
+  return categoryIds.map((id) => ({
+    params: { id: id.toString() }, // Astro benötigt die IDs als Strings
+  }));
+}
+const { id } = Astro.params; // Kategorie-ID aus der URL
+const items = listItems.filter((item) => item.categoryId === Number(id)); // Daten filtern
+---
+
+<Layout title={`Kategorie ${id} - Bezeichnungen`}>
+  <h1 class="detail-title">Bezeichnungen für Kategorie {id}</h1>
+  <div class="list-container">
+    {items.map((item) => (
+      <a href={`/category/${id}/product/${item.id}`} class="list-item">{item.label}</a>
+    ))}
+  </div>
+</Layout>

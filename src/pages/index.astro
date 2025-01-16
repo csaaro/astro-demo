@@ -1,11 +1,24 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro"; // Layout einbinden
+const categories = [
+  { id: 1, name: "Kategorie 1", description: "Beschreibung zu Kategorie 1" },
+  { id: 2, name: "Kategorie 2", description: "Beschreibung zu Kategorie 2" },
+  { id: 3, name: "Kategorie 3", description: "Beschreibung zu Kategorie 3" },
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Hauptseite - Kategorien">
+  <main class="container">
+    <h1 class="title">Wähle eine Kategorie</h1>
+    <div class="box-grid">
+      {categories.map((category) => (
+        <a href={`/category/${category.id}`} class="box">
+          <div class="box-content">
+            <h2>{category.name}</h2>
+            <p>{category.description}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
 </Layout>
