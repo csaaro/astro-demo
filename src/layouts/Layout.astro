@@ -2,7 +2,9 @@
 const { title } = Astro.props; // Titel dynamisch übergeben
 import "../assets/styles/global.css"
 import "../assets/styles/detail.css"; // Glo
-const isHomePage = Astro.url.pathname === "/"
+
+const BASE_URL = import.meta.env.BASE_URL;
+const isHomePage = Astro.url.pathname === `${BASE_URL}/`
 ---
 
 <!DOCTYPE html>
@@ -15,7 +17,7 @@ const isHomePage = Astro.url.pathname === "/"
   <body>
     <header class="header">
       <nav class="navigation">
-        {!isHomePage && <a href="/" class="nav-link">Hauptseite</a>}
+        {!isHomePage && <a href={`${BASE_URL}`}  class="nav-link">Hauptseite</a>}
         <slot name="extra-links"></slot> <!-- Zusätzliche Links -->
       </nav>
     </header>

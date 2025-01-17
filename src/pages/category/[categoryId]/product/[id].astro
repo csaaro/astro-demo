@@ -18,12 +18,13 @@ const product = products.find((p) => p.id === Number(id)); // Produktdaten suche
 if (!product) {
   throw new Error(`Produkt mit ID ${id} nicht gefunden.`);
 }
+const BASE_URL = import.meta.env.BASE_URL;
 ---
 
 
 <Layout title={product.name}>
   <div slot="extra-links">
-    <a href={`/category/${categoryId}`} class="nav-link">Zurück zur Kategorie</a>
+    <a href={`${BASE_URL}/category/${categoryId}`} class="nav-link">Zurück zur Kategorie</a>
   </div>
   <div class="detail-container">
     <h1 class="detail-title">{product.name}</h1>

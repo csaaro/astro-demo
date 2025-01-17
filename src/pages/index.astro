@@ -5,6 +5,7 @@ const categories = [
   { id: 2, name: "Kategorie 2", description: "Beschreibung zu Kategorie 2" },
   { id: 3, name: "Kategorie 3", description: "Beschreibung zu Kategorie 3" },
 ];
+const BASE_URL = import.meta.env.BASE_URL;
 ---
 
 <Layout title="Hauptseite - Kategorien">
@@ -12,7 +13,7 @@ const categories = [
     <h1 class="title">Wähle eine Kategorie</h1>
     <div class="box-grid">
       {categories.map((category) => (
-        <a href={`/category/${category.id}`} class="box">
+        <a href={`${BASE_URL}/category/${category.id}`} class="box">
           <div class="box-content">
             <h2>{category.name}</h2>
             <p>{category.description}</p>

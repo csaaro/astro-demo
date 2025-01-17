@@ -12,13 +12,14 @@ export async function getStaticPaths() {
 }
 const { id } = Astro.params; // Kategorie-ID aus der URL
 const items = listItems.filter((item) => item.categoryId === Number(id)); // Daten filtern
+const BASE_URL = import.meta.env.BASE_URL;
 ---
 
 <Layout title={`Kategorie ${id} - Bezeichnungen`}>
   <h1 class="detail-title">Bezeichnungen für Kategorie {id}</h1>
   <div class="list-container">
     {items.map((item) => (
-      <a href={`/category/${id}/product/${item.id}`} class="list-item">{item.label}</a>
+      <a href={`${BASE_URL}/category/${id}/product/${item.id}`} class="list-item">{item.label}</a>
     ))}
   </div>
 </Layout>
