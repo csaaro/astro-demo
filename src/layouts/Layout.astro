@@ -1,4 +1,5 @@
 ---
+import { pwaInfo } from 'virtual:pwa-info';
 const { title } = Astro.props; // Titel dynamisch übergeben
 import "../assets/styles/global.css"
 import "../assets/styles/detail.css"; // Glo
@@ -11,8 +12,11 @@ const isHomePage = Astro.url.pathname === `${BASE_URL}/`
 <html lang="en">
   <head>
     <meta charset="UTF-8">
+    <link rel="apple-touch-icon" href="/pwa-192x192.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><slot name="title" /></title>
+    { pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} /> }
+    <script src="/src/pwa.ts"></script>
   </head>
   <body>
     <header class="header">
