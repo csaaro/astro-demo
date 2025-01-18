@@ -3,6 +3,7 @@ import { pwaInfo } from 'virtual:pwa-info';
 const { title } = Astro.props; // Titel dynamisch übergeben
 import "../assets/styles/global.css"
 import "../assets/styles/detail.css"; // Glo
+import Footer from '../components/Footer.astro';
 
 const {BASE_URL} = import.meta.env;
 const isHomePage = Astro.url.pathname === `${BASE_URL}/`
@@ -29,5 +30,6 @@ const isHomePage = Astro.url.pathname === `${BASE_URL}/`
     <main>
       <slot />
     </main>
+    <Footer />
   </body>
 </html>

@@ -1,0 +1,87 @@
+---
+---
+<footer>
+    <style>
+      footer {
+        position: fixed;
+        bottom: 30px; /* Höher positioniert */
+        left: 50%; /* Zentriert horizontal */
+        transform: translateX(-50%); /* Zentrierung ausgleichen */
+        background-color: #007bff;
+        color: #fff;
+        text-align: center;
+        padding: 15px 30px; /* Mehr Platz für den Button */
+        border-radius: 12px; /* Abgerundete Ecken */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Stärkerer Schatten */
+      }
+  
+      button {
+        display: inline-block;
+        width: 100%; /* Button nimmt die gesamte Breite ein */
+        max-width: 300px; /* Maximale Breite */
+        font-size: 18px; /* Größere Schrift */
+        font-weight: bold; /* Fettgedruckter Text */
+        color: #007bff;
+        background-color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 15px; /* Mehr Platz im Button */
+        cursor: pointer;
+        text-transform: uppercase; /* Text in Großbuchstaben */
+      }
+  
+      button:hover {
+        background-color: #f1f1f1;
+      }
+  
+      button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+    </style>
+  
+    <button id="installBtn" style="display: none;">App installieren</button>
+  
+    <script>
+      interface BeforeInstallPromptEvent extends Event {
+        prompt: () => Promise<void>;
+        userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>;
+      }
+  
+      let deferredPrompt: BeforeInstallPromptEvent | null = null;
+  
+      window.addEventListener('beforeinstallprompt', (e: Event) => {
+        e.preventDefault(); // Standardaufforderung unterdrücken
+        deferredPrompt = e as BeforeInstallPromptEvent;
+  
+        const installBtn = document.getElementById('installBtn') as HTMLButtonElement;
+        installBtn.style.display = 'inline-block'; // Button anzeigen
+  
+        installBtn.addEventListener('click', async () => {
+          if (!deferredPrompt) return;
+  
+          // Installationsaufforderung anzeigen
+          await deferredPrompt.prompt();
+  
+          const { outcome } = await deferredPrompt.userChoice;
+          if (outcome === 'accepted') {
+            console.log('App wurde installiert.');
+          } else {
+            console.log('App-Installation abgelehnt.');
+          }
+  
+          deferredPrompt = null;
+          installBtn.style.display = 'none'; // Button ausblenden
+        });
+      });
+  
+      // Service Worker registrieren
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').then(() => {
+          console.log('Service Worker registriert.');
+        }).catch((err) => {
+          console.error('Service Worker-Registrierung fehlgeschlagen:', err);
+        });
+      }
+    </script>
+  </footer>
