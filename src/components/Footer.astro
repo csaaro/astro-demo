@@ -1,33 +1,36 @@
 ---
 ---
-<footer>
+<footer id="installFooter">
     <style>
       footer {
         position: fixed;
-        bottom: 30px; /* Höher positioniert */
+        bottom: 15px; /* Positionierung für Smartphone */
         left: 50%; /* Zentriert horizontal */
         transform: translateX(-50%); /* Zentrierung ausgleichen */
         background-color: #007bff;
         color: #fff;
         text-align: center;
-        padding: 15px 30px; /* Mehr Platz für den Button */
-        border-radius: 12px; /* Abgerundete Ecken */
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Stärkerer Schatten */
+        padding: 10px 20px;
+        border-radius: 8px; /* Abgerundete Ecken */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
   
       button {
-        display: inline-block;
-        width: 100%; /* Button nimmt die gesamte Breite ein */
+        width: 100%; /* Button füllt den Footer aus */
         max-width: 300px; /* Maximale Breite */
-        font-size: 18px; /* Größere Schrift */
-        font-weight: bold; /* Fettgedruckter Text */
+        font-size: 16px; /* Optimale Schriftgröße */
+        font-weight: bold; /* Fettgedruckt für bessere Sichtbarkeit */
         color: #007bff;
         background-color: #fff;
         border: none;
-        border-radius: 8px;
-        padding: 15px; /* Mehr Platz im Button */
+        border-radius: 5px;
+        padding: 10px 15px; /* Mehr Platz im Button */
         cursor: pointer;
         text-transform: uppercase; /* Text in Großbuchstaben */
+        transition: background-color 0.3s ease;
       }
   
       button:hover {
@@ -38,9 +41,13 @@
         background-color: #ccc;
         cursor: not-allowed;
       }
+  
+      footer.hidden {
+        display: none; /* Footer ausblenden */
+      }
     </style>
   
-    <button id="installBtn" style="display: none;">App installieren</button>
+    <button id="installBtn">App installieren</button>
   
     <script>
       interface BeforeInstallPromptEvent extends Event {
@@ -50,12 +57,15 @@
   
       let deferredPrompt: BeforeInstallPromptEvent | null = null;
   
+      const footer = document.getElementById('installFooter') as HTMLElement;
+      const installBtn = document.getElementById('installBtn') as HTMLButtonElement;
+  
+      // Auf das `beforeinstallprompt`-Event hören
       window.addEventListener('beforeinstallprompt', (e: Event) => {
         e.preventDefault(); // Standardaufforderung unterdrücken
         deferredPrompt = e as BeforeInstallPromptEvent;
   
-        const installBtn = document.getElementById('installBtn') as HTMLButtonElement;
-        installBtn.style.display = 'inline-block'; // Button anzeigen
+        footer.classList.remove('hidden'); // Footer anzeigen
   
         installBtn.addEventListener('click', async () => {
           if (!deferredPrompt) return;
@@ -71,17 +81,14 @@
           }
   
           deferredPrompt = null;
-          installBtn.style.display = 'none'; // Button ausblenden
+          footer.classList.add('hidden'); // Footer ausblenden
         });
       });
   
-      // Service Worker registrieren
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js').then(() => {
-          console.log('Service Worker registriert.');
-        }).catch((err) => {
-          console.error('Service Worker-Registrierung fehlgeschlagen:', err);
-        });
-      }
+      // Nach Installation ausblenden
+      window.addEventListener('appinstalled', () => {
+        console.log('App erfolgreich installiert.');
+        footer.classList.add('hidden'); // Footer ausblenden
+      });
     </script>
   </footer>
