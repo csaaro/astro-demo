@@ -10,7 +10,7 @@ export default defineConfig({
             AstroPWA({
               mode: 'development',
               base: 'astro-demo/',
-              scope: '/',
+              scope: '/astro-demo/',
               includeAssets: ['favicon.svg'],
               registerType: 'autoUpdate',
               manifest: {
