@@ -1,49 +1,50 @@
 ---
 ---
-<footer id="installFooter">
+<footer id="installFooter" class="hidden">
     <style>
       footer {
         position: fixed;
-        bottom: 15px; /* Positionierung für Smartphone */
-        left: 50%; /* Zentriert horizontal */
-        transform: translateX(-50%); /* Zentrierung ausgleichen */
-        background-color: #red;
-        color: red;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: red;
+        color: white;
         text-align: center;
         padding: 10px 20px;
-        border-radius: 8px; /* Abgerundete Ecken */
+        border-radius: 8px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         display: flex;
         justify-content: center;
         align-items: center;
+        z-index: 1000;
       }
-  
+
       button {
-        width: 100%; /* Button füllt den Footer aus */
-        max-width: 300px; /* Maximale Breite */
-        font-size: 16px; /* Optimale Schriftgröße */
-        font-weight: bold; /* Fettgedruckt für bessere Sichtbarkeit */
+        width: 100%;
+        max-width: 300px;
+        font-size: 16px;
+        font-weight: bold;
         color: white;
-        background-color:red;
+        background-color: darkred;
         border: none;
         border-radius: 5px;
-        padding: 10px 15px; /* Mehr Platz im Button */
+        padding: 10px 15px;
         cursor: pointer;
-        text-transform: uppercase; /* Text in Großbuchstaben */
+        text-transform: uppercase;
         transition: background-color 0.3s ease;
       }
-  
+
       button:hover {
-        background-color: darkred;
+        background-color: crimson;
       }
-  
+
       button:disabled {
         background-color: #ccc;
         cursor: not-allowed;
       }
-  
+
       footer.hidden {
-        display: none; /* Footer ausblenden */
+        display: none;
       }
     </style>
   
@@ -55,40 +56,61 @@
         userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>;
       }
   
+            // Erweiterung des Navigator-Interfaces, um "standalone" hinzuzufügen
+      declare global {
+        interface Navigator {
+          standalone?: boolean;
+        }
+      }
       let deferredPrompt: BeforeInstallPromptEvent | null = null;
   
       const footer = document.getElementById('installFooter') as HTMLElement;
       const installBtn = document.getElementById('installBtn') as HTMLButtonElement;
+      document.addEventListener('DOMContentLoaded', () => {
+      })
   
       // Auf das `beforeinstallprompt`-Event hören
-      window.addEventListener('beforeinstallprompt', (e: Event) => {
-        e.preventDefault(); // Standardaufforderung unterdrücken
-        deferredPrompt = e as BeforeInstallPromptEvent;
-  
-        footer.classList.remove('hidden'); // Footer anzeigen
-  
-        installBtn.addEventListener('click', async () => {
-          if (!deferredPrompt) return;
-  
-          // Installationsaufforderung anzeigen
-          await deferredPrompt.prompt();
-  
-          const { outcome } = await deferredPrompt.userChoice;
-          if (outcome === 'accepted') {
-            console.log('App wurde installiert.');
-          } else {
-            console.log('App-Installation abgelehnt.');
-          }
-  
-          deferredPrompt = null;
+      document.addEventListener('DOMContentLoaded', () => {
+        // `beforeinstallprompt`-Event abfangen
+        window.addEventListener('beforeinstallprompt', (e) => {
+          e.preventDefault(); // Standardaufforderung blockieren
+          deferredPrompt = e as (Event & {
+            prompt: () => Promise<void>;
+            userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
+          }); // Typcasting für e
+
+          // Footer anzeigen
+          footer.classList.remove('hidden');
+
+          installBtn.addEventListener('click', async () => {
+            if (!deferredPrompt) return;
+
+            // Installationsaufforderung anzeigen
+            await deferredPrompt.prompt();
+
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+              console.log('App wurde installiert.');
+            } else {
+              console.log('App-Installation abgelehnt.');
+            }
+
+            // Prompt zurücksetzen und Footer ausblenden
+            deferredPrompt = null;
+            footer.classList.add('hidden');
+          });
+        });
+
+        // Sobald die App installiert ist
+        window.addEventListener('appinstalled', () => {
+          console.log('App erfolgreich installiert.');
           footer.classList.add('hidden'); // Footer ausblenden
         });
-      });
-  
-      // Nach Installation ausblenden
-      window.addEventListener('appinstalled', () => {
-        console.log('App erfolgreich installiert.');
-        footer.classList.add('hidden'); // Footer ausblenden
+
+        // Überprüfen, ob die App als PWA läuft
+        if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+          footer.classList.add('hidden'); // Footer ausblenden
+        }
       });
     </script>
   </footer>
