@@ -1,0 +1,27 @@
+/* Header */
+.header {
+  display: flex;
+  justify-content: center; /* Zentriert den Inhalt horizontal */
+  align-items: center; /* Zentriert den Inhalt vertikal */
+  background-color: red; /* Schwarzer Hintergrund */
+  padding: 10px 20px;
+  height: 60px; /* Feste Höhe des Headers */
+}
+
+/* Navigation */
+.navigation {
+  display: flex;
+  gap: 15px; /* Abstand zwischen den Links */
+}
+
+.nav-link {
+  text-decoration: none; /* Entfernt die Unterstreichung */
+  color: white; /* Weiße Schriftfarbe */
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: rgb(7, 7, 7); /* Farbe beim Hover */
+}

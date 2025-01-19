@@ -1,0 +1,41 @@
+.detail-title {
+  text-align: center;
+  margin: 20px auto;
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+}
+
+/* Container für die Liste */
+.list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Abstand zwischen den Elementen */
+  width: 100%;
+  max-width: 800px; /* Maximale Breite der Liste */
+  margin: 20px auto; /* Zentriert die Liste */
+  padding: 10px;
+}
+
+
+
+/* Styling für einzelne Listenelemente */
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px; /* Feste Höhe */
+  background-color: red;  /* Hintergrundfarbe */
+  border-radius: 30px; /* Abgerundete Ecken */
+  font-size: 1.2rem;
+  color: white; /* Textfarbe */
+  text-decoration: none; /* Entfernt Unterstreichung */
+  padding: 0 20px; /* Innenabstand */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Leichter Schatten */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Animation */
+}
+
+.list-item:hover {
+  background-color: darkred /* Hellblauer Hover-Effekt */
+  
+}

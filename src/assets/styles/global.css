@@ -1,44 +1,12 @@
-/* Container für die Liste */
-.list-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px; /* Abstand zwischen den Elementen */
-  width: 100%;
-  max-width: 800px; /* Maximale Breite der Liste */
-  margin: 20px auto; /* Zentriert die Liste */
-  padding: 10px;
-}
 
-/* Styling für einzelne Listenelemente */
-.list-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 60px; /* Feste Höhe */
-  background-color: #ffffff; /* Hintergrundfarbe */
-  border: 2px solid #ccc; /* Rand */
-  border-radius: 30px; /* Abgerundete Ecken */
-  font-size: 1.2rem;
-  color: #333; /* Textfarbe */
-  text-decoration: none; /* Entfernt Unterstreichung */
-  padding: 0 20px; /* Innenabstand */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Leichter Schatten */
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Animation */
-}
-
-.list-item:hover {
-  background-color: #e6f7ff; /* Hellblauer Hover-Effekt */
-  transform: translateY(-3px); /* Leichtes Anheben bei Hover */
-}
 
 /* Überschrift */
 .title {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  text-align: center;
-  color: #4caf50;
+  color: white; /* Weiße Schriftfarbe */
+  font-size: 2.5rem; /* Größe des Titels */
+  text-align: center; /* Zentriert */
+  margin-bottom: 20px; /* Abstand nach unten */
 }
-
 
 /* Allgemeines Styling */
 body {
@@ -56,19 +24,14 @@ body {
   padding: 20px;
 }
 
-.title {
-  margin-bottom: 30px;
-  font-size: 2.5rem;
-  text-align: center;
-  color: #333;
-}
-
 /* Grid für die Kategorien */
 .box-grid {
   display: grid;
-  gap: 20px;
+  gap: 25px; /* 2,5 cm Abstand (24px aufgerundet) */
   width: 100%;
   max-width: 1200px;
+  grid-template-columns: repeat(2, 1fr); /* Zwei Spalten */
+  justify-items: center; /* Zentriert die Boxen */
 }
 
 /* Box-Design */
@@ -77,68 +40,71 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(145deg, #ffffff, #e6e6e6);
-  border: 2px solid #ccc;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+  background-color: red; /* Roter Hintergrund */
+  border: 2px solid white; /* Weißer Rahmen */
+  border-radius: 15px; /* Abgerundete Ecken */
+  width: 250px; /* Breite der Box */
+  height: 150px; /* Höhe der Box */
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1); /* Leichter Schatten */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .box:hover {
   transform: translateY(-10px);
   box-shadow: 5px 15px 20px rgba(0, 0, 0, 0.2);
-  background: linear-gradient(145deg, #f9f9f9, #e6e6e6);
+  background-color: darkred; /* Dunkleres Rot beim Hover */
 }
 
 .box-content {
   text-align: center;
+  color: white; /* Weißer Text */
 }
 
 .box-content h2 {
   margin: 0;
-  font-size: 1.8rem;
-  color: #4caf50;
+  font-size: 1.5rem;
 }
 
 .box-content p {
   margin-top: 10px;
-  font-size: 1.2rem;
-  color: #666;
+  font-size: 1rem;
 }
 
 /* Hochformat-Layout */
 @media screen and (orientation: portrait) {
   .box-grid {
-    grid-template-columns: 1fr; /* Eine Spalte für Hochformat */
+    grid-template-columns: 1fr; /* Eine Spalte im Hochformat */
+    gap: 15px; /* Platz zwischen den Boxen */
   }
 }
 
 /* Querformat-Layout */
 @media screen and (orientation: landscape) {
   .box-grid {
-    grid-template-columns: 1fr 1fr; /* Zwei Spalten */
-    grid-template-rows: auto auto; /* Zwei Reihen */
-    gap: 40px; /* Platz zwischen den Boxen */
+    grid-template-columns: repeat(2, 1fr); /* Zwei Spalten im Querformat */
+    grid-template-rows: repeat(3, auto); /* Zwei Reihen */
+    gap: 25px; /* Vertikaler und horizontaler Abstand: 2,5 cm */
   }
 
   /* Kategorie 1 */
   .box-grid > .box:nth-child(1) {
-    grid-column: 1 / 2; /* Erste Spalte */
+    grid-column: 1; /* Erste Spalte */
     grid-row: 1;
+    margin-left: 250px; /* Reduziert den Abstand zur linken Box */
   }
 
   /* Kategorie 2 */
   .box-grid > .box:nth-child(2) {
-    grid-column: 2 / 3; /* Zweite Spalte */
+    grid-column: 2; /* Zweite Spalte */
     grid-row: 1;
+    margin-left: -250px; /* Reduziert den Abstand zur linken Box */
   }
 
   /* Kategorie 3 */
   .box-grid > .box:nth-child(3) {
-    grid-column: 1 / 3; /* Mittig unter 1 und 2 */
+    grid-column: 1 / 3; /* Unterhalb der oberen Boxen */
     grid-row: 2;
-    justify-self: center; /* Zentriere Kategorie 3 horizontal */
-    width: 60%; /* Reduziere die Breite, damit sie nicht gestreckt wird */
+    width: 250px; /* Gleiche Breite wie die oberen Boxen */
+    height: 150px; /* Gleiche Höhe wie die oberen Boxen */
   }
 }
