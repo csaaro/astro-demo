@@ -1,5 +1,3 @@
-
-
 /* Überschrift */
 .title {
   color: white; /* Weiße Schriftfarbe */
@@ -27,11 +25,11 @@ body {
 /* Grid für die Kategorien */
 .box-grid {
   display: grid;
-  gap: 25px; /* 2,5 cm Abstand (24px aufgerundet) */
+  gap: 25px; /* Abstand zwischen den Boxen */
   width: 100%;
   max-width: 1200px;
-  grid-template-columns: repeat(2, 1fr); /* Zwei Spalten */
-  justify-items: center; /* Zentriert die Boxen */
+  grid-auto-rows: minmax(150px, auto); /* Flexible Zeilenhöhe */
+  justify-content: center; /* Zentriert das Grid */
 }
 
 /* Box-Design */
@@ -43,8 +41,8 @@ body {
   background-color: red; /* Roter Hintergrund */
   border: 2px solid white; /* Weißer Rahmen */
   border-radius: 15px; /* Abgerundete Ecken */
-  width: 250px; /* Breite der Box */
-  height: 150px; /* Höhe der Box */
+  width: 250px; /* Feste Breite */
+  height: 150px; /* Feste Höhe */
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1); /* Leichter Schatten */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -73,38 +71,59 @@ body {
 /* Hochformat-Layout */
 @media screen and (orientation: portrait) {
   .box-grid {
-    grid-template-columns: 1fr; /* Eine Spalte im Hochformat */
-    gap: 15px; /* Platz zwischen den Boxen */
+    grid-template-columns: 1fr; /* Eine Spalte */
+    gap: 25px; /* Abstand zwischen den Boxen */
+    justify-content: center; /* Zentriert horizontal */
+    align-items: center; /* Zentriert horizontal */
+  }
+
+  /* Alle Boxen werden automatisch untereinander zentriert */
+  .box-grid > .box {
+    grid-column: 1; /* Jede Box nimmt die einzige Spalte ein */
+    justify-self: center; /* Zentriert jede Box horizontal */
   }
 }
 
-/* Querformat-Layout */
+/* Querformat-Layout: Umgekehrte Pyramide */
 @media screen and (orientation: landscape) {
   .box-grid {
-    grid-template-columns: repeat(2, 1fr); /* Zwei Spalten im Querformat */
-    grid-template-rows: repeat(3, auto); /* Zwei Reihen */
-    gap: 25px; /* Vertikaler und horizontaler Abstand: 2,5 cm */
+    grid-template-columns: repeat(3, 1fr); /* Drei Spalten */
+    gap: 20px; /* Dynamischer Abstand */
   }
 
-  /* Kategorie 1 */
+  /* Erste Reihe mit zwei Boxen */
   .box-grid > .box:nth-child(1) {
-    grid-column: 1; /* Erste Spalte */
-    grid-row: 1;
-    margin-left: 250px; /* Reduziert den Abstand zur linken Box */
+    grid-column: 1; /* Linke Spalte */
+    grid-row: 1; /* Erste Zeile */
   }
 
-  /* Kategorie 2 */
   .box-grid > .box:nth-child(2) {
-    grid-column: 2; /* Zweite Spalte */
-    grid-row: 1;
-    margin-left: -250px; /* Reduziert den Abstand zur linken Box */
+    grid-column: 3; /* Rechte Spalte */
+    grid-row: 1; /* Erste Zeile */
   }
 
-  /* Kategorie 3 */
+  /* Zweite Reihe mit der dritten Box */
   .box-grid > .box:nth-child(3) {
-    grid-column: 1 / 3; /* Unterhalb der oberen Boxen */
-    grid-row: 2;
-    width: 250px; /* Gleiche Breite wie die oberen Boxen */
-    height: 150px; /* Gleiche Höhe wie die oberen Boxen */
+    grid-column: 2; /* Mittlere Spalte */
+    grid-row: 2; /* Zweite Zeile */
+  }
+
+  /* Dritte Reihe mit zwei Boxen */
+  .box-grid > .box:nth-child(4),
+  .box-grid > .box:nth-child(5) {
+    grid-column: span 1; /* Jede Box nimmt eine Spalte ein */
+    grid-row: 3; /* Dritte Zeile */
+  }
+
+  /* Vierte Reihe mit einer Box */
+  .box-grid > .box:nth-child(6) {
+    grid-column: 2; /* Zentriert in der Mitte */
+    grid-row: 4; /* Vierte Zeile */
+  }
+
+  /* Zusätzliche Boxen in weiteren Zeilen */
+  .box-grid > .box:nth-child(n+7) {
+    grid-column: span 1; /* Normale Platzierung */
+    grid-row: auto; /* Automatische Reihenfolge */
   }
 }
