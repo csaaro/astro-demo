@@ -25,11 +25,14 @@ body {
 /* Grid für die Kategorien */
 .box-grid {
   display: grid;
-  gap: 25px; /* Abstand zwischen den Boxen */
+  gap: 20px; /* Abstand zwischen den Boxen */
   width: 100%;
-  max-width: 1200px;
+  max-width: 1000px; /* Maximalbreite für das Grid */
   grid-auto-rows: minmax(150px, auto); /* Flexible Zeilenhöhe */
-  justify-content: center; /* Zentriert das Grid */
+  grid-template-columns: repeat(3, 1fr); /* Drei gleichmäßige Spalten */
+  justify-content: center; /* Zentriert das Grid horizontal */
+  margin: 0 auto; /* Zentriert das gesamte Grid */
+  padding: 0 20px; /* Gleicher Abstand links und rechts */
 }
 
 /* Box-Design */
@@ -41,8 +44,8 @@ body {
   background-color: red; /* Roter Hintergrund */
   border: 2px solid white; /* Weißer Rahmen */
   border-radius: 15px; /* Abgerundete Ecken */
-  width: 250px; /* Feste Breite */
-  height: 150px; /* Feste Höhe */
+  width: 220px; /* Schmalere Breite */
+  height: 120px; /* Angepasste Höhe */
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1); /* Leichter Schatten */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -72,7 +75,7 @@ body {
 @media screen and (orientation: portrait) {
   .box-grid {
     grid-template-columns: 1fr; /* Eine Spalte */
-    gap: 25px; /* Abstand zwischen den Boxen */
+    gap: 20px; /* Abstand zwischen den Boxen */
     justify-content: center; /* Zentriert horizontal */
     align-items: center; /* Zentriert horizontal */
   }
@@ -84,28 +87,34 @@ body {
   }
 }
 
-/* Querformat-Layout: Umgekehrte Pyramide */
+/* Querformat-Layout */
 @media screen and (orientation: landscape) {
   .box-grid {
-    grid-template-columns: repeat(3, 1fr); /* Drei Spalten */
+    grid-template-columns: repeat(3, minmax(220px, 1fr)); /* Drei Spalten mit minimaler Breite */
     gap: 20px; /* Dynamischer Abstand */
+    padding: 2% 2%; /* Innenabstand links und rechts */
   }
 
   /* Erste Reihe mit zwei Boxen */
   .box-grid > .box:nth-child(1) {
     grid-column: 1; /* Linke Spalte */
     grid-row: 1; /* Erste Zeile */
+    justify-self: center; /* Nach rechts innerhalb der linken Spalte */
+    margin-right: -50%; /* Dynamischer Abstand zur zweiten Box */
   }
 
   .box-grid > .box:nth-child(2) {
     grid-column: 3; /* Rechte Spalte */
     grid-row: 1; /* Erste Zeile */
+    justify-self: center; /* Nach links innerhalb der rechten Spalte */
+    margin-left: -50%; /* Dynamischer Abstand zur ersten Box */
   }
 
   /* Zweite Reihe mit der dritten Box */
   .box-grid > .box:nth-child(3) {
     grid-column: 2; /* Mittlere Spalte */
     grid-row: 2; /* Zweite Zeile */
+    justify-self: center; /* Zentriert innerhalb der Spalte */
   }
 
   /* Dritte Reihe mit zwei Boxen */
@@ -113,17 +122,20 @@ body {
   .box-grid > .box:nth-child(5) {
     grid-column: span 1; /* Jede Box nimmt eine Spalte ein */
     grid-row: 3; /* Dritte Zeile */
+    justify-self: center; /* Zentriert innerhalb der Spalte */
   }
 
   /* Vierte Reihe mit einer Box */
   .box-grid > .box:nth-child(6) {
     grid-column: 2; /* Zentriert in der Mitte */
     grid-row: 4; /* Vierte Zeile */
+    justify-self: center; /* Zentriert innerhalb der Spalte */
   }
 
   /* Zusätzliche Boxen in weiteren Zeilen */
   .box-grid > .box:nth-child(n+7) {
     grid-column: span 1; /* Normale Platzierung */
     grid-row: auto; /* Automatische Reihenfolge */
+    justify-self: center; /* Zentriert */
   }
 }

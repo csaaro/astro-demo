@@ -4,11 +4,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-width: 800px; /* Maximale Breite */
-    margin: 20px auto; /* Zentriert die Box */
-    padding: 20px;
+    max-width: 50%; /* Maximale Breite */
+    margin: 25px auto; /* Zentriert die Box */
+    padding:20px;
     background-color: #000; /* Schwarzer Hintergrund */
-    border-radius: 10px; /* Abgerundete Ecken */
+    border-radius: 20px; /* Abgerundete Ecken */
     border: 2px solid white; /* Weißer Rahmen */
     box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3); /* Leichter Schatten */
   }
@@ -19,7 +19,7 @@
     font-weight: bold; /* Fettschrift */
     color: white; /* Weiße Schrift */
     text-align: center;
-    margin-bottom: 20px; /* Abstand zum Textfeld */
+    margin: 5% 0 5%; /* Zentriert die Box */
   }
   
   /* Textfeld für die Beschreibung */
@@ -29,13 +29,14 @@
     color: white; /* Weiße Schrift */
     background-color: #222; /* Dunkler Hintergrund für Textfeld */
     padding: 20px; /* Abstand innerhalb des Textfelds */
-    border-radius: 8px; /* Abgerundete Ecken */
+    border-radius: 10px; /* Abgerundete Ecken */
     border: 2px solid white; /* Weißer Rahmen */
     box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2); /* Leichter Schatten */
     text-align: left; /* Linksbündiger Text */
     width: 100%; /* Volle Breite innerhalb des Containers */
     max-width: 700px; /* Begrenzung der Breite */
-    min-height: 10cm; /* Mindesthöhe von 10 cm */
+    min-height: 100%; /* Mindesthöhe von 10 cm */
+    margin: 5% 5%;
   }
   
   /* Navigation zurück zur Kategorie */

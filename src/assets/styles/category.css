@@ -11,8 +11,8 @@
   display: flex;
   flex-direction: column;
   gap: 15px; /* Abstand zwischen den Elementen */
-  width: 100%;
-  max-width: 800px; /* Maximale Breite der Liste */
+  width: 50%;
+  max-width: 50%; /* Maximale Breite der Liste */
   margin: 20px auto; /* Zentriert die Liste */
   padding: 10px;
 }
