@@ -2,17 +2,16 @@
 ---
 <footer id="installFooter" class="hidden">
     <style>
-      footer {
+       footer {
         position: fixed;
-        bottom: 15px;
-        left: 50%;
-        transform: translateX(-50%);
+        bottom: 0; /* Immer unten fixiert */
+        left: 0; /* Ganz links */
+        width: 100%; /* Breite über den gesamten Bildschirm */
         background-color: red;
         color: white;
         text-align: center;
         padding: 10px 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2); /* Schatten nach oben */
         display: flex;
         justify-content: center;
         align-items: center;
