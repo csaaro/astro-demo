@@ -41,11 +41,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: red; /* Roter Hintergrund */
-  border: 2px solid white; /* Weißer Rahmen */
+  background-color: white; /* Roter Hintergrund */
+  border: 2px solid red; /* Weißer Rahmen */
   border-radius: 15px; /* Abgerundete Ecken */
-  width: 220px; /* Schmalere Breite */
-  height: 120px; /* Angepasste Höhe */
+  width: 300px; /* Schmalere Breite */
+  height: 200px; /* Angepasste Höhe */
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1); /* Leichter Schatten */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -53,12 +53,12 @@ body {
 .box:hover {
   transform: translateY(-10px);
   box-shadow: 5px 15px 20px rgba(0, 0, 0, 0.2);
-  background-color: darkred; /* Dunkleres Rot beim Hover */
+  background-color: whitesmoke; /* Dunkleres Rot beim Hover */
 }
 
 .box-content {
   text-align: center;
-  color: white; /* Weißer Text */
+  color: black; /* Weißer Text */
 }
 
 .box-content h2 {
