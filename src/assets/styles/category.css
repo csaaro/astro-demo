@@ -24,7 +24,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 60px; /* Feste Höhe */
+  height: 50px; /* Feste Höhe */
   background-color: red;  /* Hintergrundfarbe */
   border-radius: 30px; /* Abgerundete Ecken */
   font-size: 1.2rem;
